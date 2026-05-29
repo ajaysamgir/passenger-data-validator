@@ -213,11 +213,23 @@ export function PassengerForm({ onSuccess }: PassengerFormProps) {
             name="passportNumber"
             type="text"
             autoComplete="off"
+            placeholder="e.g. AB1234567"
+            maxLength={10}
             className={inputClassName}
             value={values.passportNumber}
-            onChange={updateField("passportNumber")}
+            onChange={(e) => {
+              setValues((current) => ({
+                ...current,
+                passportNumber: e.target.value.toUpperCase(),
+              }));
+              setServerErrors([]);
+              setSuccessMessage(null);
+            }}
             onBlur={() => markTouched("passportNumber")}
             aria-invalid={showError("passportNumber")}
+            aria-describedby={
+              showError("passportNumber") ? "passportNumber-error" : undefined
+            }
           />
         </FormField>
 

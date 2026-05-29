@@ -16,8 +16,8 @@ export function normalizePassengerInput(
 ): PassengerInput {
   return {
     ...input,
-    passportNumber: input.passportNumber.toUpperCase(),
-    flightNumber: input.flightNumber.toUpperCase(),
+    passportNumber: input.passportNumber.trim().toUpperCase(),
+    flightNumber: input.flightNumber.trim().toUpperCase(),
   };
 }
 

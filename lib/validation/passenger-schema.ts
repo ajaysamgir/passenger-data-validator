@@ -7,7 +7,7 @@ import {
   type GenderOption,
 } from "@/lib/validation/constants";
 
-export const PASSPORT_REGEX = /^[A-Z0-9]{6,9}$/i;
+export const PASSPORT_REGEX = /^[A-Z]{1,3}[0-9]{5,7}$/i;
 export const FLIGHT_NUMBER_REGEX = /^[A-Z]{2,3}\d{1,4}$/i;
 export const PHONE_REGEX = /^\d{8,15}$/;
 
@@ -38,9 +38,10 @@ export const passengerInputSchema = z
     passportNumber: z
       .string()
       .min(1, "Passport number is required")
+      .trim()
       .regex(
         PASSPORT_REGEX,
-        "Passport must be 6–9 letters and numbers (e.g. AB123456)",
+        "Passport must be 1–3 letters followed by 5–7 digits (e.g. AB1234567)",
       ),
     nationality: countrySchema,
     age: z.coerce
