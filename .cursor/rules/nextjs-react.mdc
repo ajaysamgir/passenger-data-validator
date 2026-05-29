@@ -1,0 +1,31 @@
+---
+description: Next.js 16 and React 19 conventions
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Next.js and React
+
+## Next.js 16
+
+This project uses Next.js 16 with breaking changes vs older versions. When unsure, read guides under `node_modules/next/dist/docs/` and follow deprecation notices in `AGENTS.md`.
+
+## App Router
+
+- Use App Router conventions (`app/` directory).
+- Default to Server Components; add `"use client"` only when needed (forms, hooks, browser APIs).
+- API: Route Handlers in `app/api/**/route.ts`.
+
+## Code style
+
+- Functional components only.
+- Import via `@/*` path alias (see `tsconfig.json`).
+- Styling: Tailwind CSS 4 only — no Material UI, Bootstrap, or other heavy UI kits.
+- Colocate feature UI under `components/`; avoid bloating `app/page.tsx`.
+
+## UX expectations (from AC)
+
+- Responsive layout, accessible labels, loading state on submit, disabled submit when invalid.
+- Success and error feedback visible to the user.
+
+Verify UI work against `docs/ACCEPTANCE_CRITERIA.md` §1, §2, and §10 (frontend features).

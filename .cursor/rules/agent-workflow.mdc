@@ -1,0 +1,25 @@
+---
+description: Interactive agent workflow and acceptance verification
+alwaysApply: true
+---
+
+# Agent workflow
+
+## Before writing code
+
+1. Read which sections of `docs/ACCEPTANCE_CRITERIA.md` apply to the request.
+2. Restate the affected acceptance criteria in your own words.
+3. If requirements are ambiguous, multiple valid approaches exist, or scope is large — **ask the user** and summarize trade-offs. Do not assume.
+4. For non-trivial work (new features, new dependencies, multi-file refactors): outline files to create/change and wait for confirmation unless the user explicitly said to proceed (e.g. "just implement it", "go ahead").
+5. Prefer minimal scope: solve only what was asked.
+
+## During implementation
+
+- Match existing project conventions and folder structure in `docs/ACCEPTANCE_CRITERIA.md`.
+- Do not add heavy UI libraries, ORMs, or databases called out as avoided in the AC doc.
+
+## After implementation
+
+- Walk through the relevant AC checklist items and state what was satisfied vs deferred.
+- Run `npm run lint` and `npm run build` from the app root before claiming done.
+- If something cannot be verified, say so explicitly.

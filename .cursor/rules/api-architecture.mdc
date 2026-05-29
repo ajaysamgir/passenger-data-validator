@@ -1,0 +1,42 @@
+---
+description: REST API and server architecture
+globs: "**/api/**/*,**/lib/**/*"
+alwaysApply: false
+---
+
+# API architecture
+
+Full contracts: `docs/ACCEPTANCE_CRITERIA.md` §3, §6, §7.
+
+## Endpoints
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| POST | `/api/passenger/validate` | Validate and store passenger |
+| GET | `/api/passengers` | List stored passengers |
+| DELETE | `/api/passengers` | Clear all passengers |
+
+## Handler pattern
+
+1. Parse JSON body / query.
+2. Validate with `lib/validation/` (same rules as client).
+3. Call `lib/db/` or service layer.
+4. Map result to HTTP status + JSON.
+
+## Response shapes
+
+**Success:** `{ "success": true, "message": "...", "data": { "id": number } }`
+
+**Failure:** `{ "success": false, "errors": ["...", "..."] }`
+
+Use 400 (or 422) for validation errors; 201/200 for success as appropriate.
+
+## Other
+
+- Log requests at a basic level (method, path, status).
+- CORS: only if frontend is hosted separately; monolithic Next.js usually does not need it.
+- Env: use `process.env` / `.env.local` for configurable values.
+
+## Database
+
+- SQLite `:memory:` in `lib/db/`; seed dummy rows on init; no writes on failed validation.
