@@ -1,5 +1,7 @@
 # Functional Documentation — Airline Passenger Data Validator
 
+> **Diagrams:** See [DIAGRAMS.md](./DIAGRAMS.md) for all UML diagrams referenced in this document.
+
 ## Overview
 
 The Airline Passenger Data Validator is a single-page web application that allows airline staff to enter, validate, and store passenger travel details before boarding. It performs real-time client-side validation as the user types and then sends data to a server for a final independent check before storing it.
@@ -54,6 +56,8 @@ Errors appear under each field as soon as the user leaves a field (on blur) or a
 ---
 
 ### 3. Submit Flow
+
+> See [Sequence Diagram →](./DIAGRAMS.md#3-request--data-flow--sequence-diagram) and [Validation Flowchart →](./DIAGRAMS.md#4-validation-pipeline--flowchart)
 
 1. User fills in the form — the Submit button activates when all client rules pass.
 2. User clicks **Validate passenger**.
@@ -128,6 +132,8 @@ Australia, Canada, France, Germany, India, Japan, Singapore, United Arab Emirate
 ---
 
 ## API Endpoints (for integrators)
+
+> See [API Endpoint Map →](./DIAGRAMS.md#7-api-endpoint-map)
 
 | Method | Path | Purpose | Success Status |
 |--------|------|---------|----------------|
