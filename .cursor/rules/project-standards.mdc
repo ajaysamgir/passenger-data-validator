@@ -1,0 +1,39 @@
+---
+description: Core coding principles and project structure
+alwaysApply: true
+---
+
+# Project standards
+
+## Coding principles
+
+- **Minimal scope:** Smallest correct change; no drive-by refactors or unrelated edits.
+- **Consistency:** Match naming, imports (`@/*`), formatting, and patterns already in the repo.
+- **TypeScript:** Respect `strict` mode; prefer explicit types at module boundaries.
+- **Self-explanatory code:** Comments only for non-obvious business rules.
+- **Tests:** Add only when requested or when they cover meaningful behavior (not trivial asserts).
+
+## Folder structure
+
+Follow the layout in `docs/ACCEPTANCE_CRITERIA.md`:
+
+- `app/` — pages and `app/api/**/route.ts`
+- `components/` — UI (form, list, alerts)
+- `lib/validation/` — Zod schemas and shared rules
+- `lib/db/` — SQLite in-memory access
+- `lib/types/` — Passenger and API DTOs
+
+## Design patterns
+
+- **Separation of concerns:** UI ≠ validation ≠ persistence ≠ HTTP mapping.
+- **Single source of truth:** Share validation schemas between client and server where possible.
+- **Thin route handlers:** Delegate to `lib/` services; keep `route.ts` to HTTP status + JSON mapping.
+- **Explicit errors:** Return user-facing messages via API `errors[]`; no silent failures.
+
+## Dependencies
+
+- Keep the stack lightweight; avoid MongoDB, PostgreSQL, Prisma, Docker, and heavy ORMs unless the user explicitly approves.
+
+## Completion
+
+Before marking work complete, verify relevant items in `docs/ACCEPTANCE_CRITERIA.md`.

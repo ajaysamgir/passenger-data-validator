@@ -1,0 +1,37 @@
+---
+description: Passenger validation domain rules
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Validation domain
+
+Full checklists: `docs/ACCEPTANCE_CRITERIA.md` §2 and §4.
+
+## Required fields
+
+Passenger Full Name, Passport Number, Nationality, Age, Gender, Flight Number, Departure Country, Destination Country, Travel Date, Email, Phone Number.
+
+## Client rules (also re-check on server)
+
+| Field | Rule |
+|-------|------|
+| All above | Required |
+| Email | Valid email format |
+| Passport | Project-consistent format (same regex/message client + server) |
+| Age | Integer 1–120 inclusive |
+| Flight number | Pattern like `AI101` (letters + digits) |
+| Phone | Numeric validation |
+
+## Server-only rules
+
+- Duplicate passport (reject if already in DB)
+- Invalid nationality (use shared allowed list/validator)
+- Departure country ≠ destination country
+- Travel date not in the past
+
+## Implementation
+
+- Define rules in `lib/validation/` (Zod recommended).
+- Reuse schemas on client form and in `POST /api/passenger/validate`.
+- Never persist on validation failure.
